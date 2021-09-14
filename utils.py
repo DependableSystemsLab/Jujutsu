@@ -4,7 +4,7 @@
 
 import numpy as np
 import csv
-import matplotlib.pyplot as plt
+#import matplotlib.pyplot as plt
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -72,7 +72,7 @@ def log_generation(log_dir):
                 epochs.append(int(i[0]))
                 train_rate.append(float(i[1]))
                 test_rate.append(float(i[2]))
-
+    '''
     # Generate the success line
     plt.figure(num=0)
     plt.plot(epochs, test_rate, label='test_success_rate', linewidth=2, color='r')
@@ -85,3 +85,4 @@ def log_generation(log_dir):
     plt.legend()
     plt.savefig("training_pictures/patch_attack_success_rate.png")
     plt.close(0)
+    '''
