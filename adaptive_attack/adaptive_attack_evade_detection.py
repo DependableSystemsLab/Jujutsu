@@ -50,7 +50,7 @@ parser.add_argument('--max_iteration', type=int, default=1000, help="max iterati
 parser.add_argument('--target', type=int, default=859, help="target label")
 parser.add_argument('--epochs', type=int, default=30, help="total epoch")
 parser.add_argument('--data_dir', type=str, default='/imagenet-val/ILSVRC2012_img_val', help="dir of the dataset")
-parser.add_argument('--patch_type', type=str, default='rectangle', help="type of the patch")
+parser.add_argument('--patch_type', type=str, default='square', help="type of the patch")
 parser.add_argument('--GPU', type=str, required=True, help="index pf used GPU")
 parser.add_argument('--log_dir', type=str, default='patch_attack_log.csv', help='dir of the log')
 parser.add_argument('--detect_box_half_radius', type = int, default=51, help='half of the length of the detection bounding box. Eg, 51 means we draw a 102*102 box')
