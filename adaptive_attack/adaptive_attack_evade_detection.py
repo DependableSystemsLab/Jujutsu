@@ -251,7 +251,7 @@ def patch_attack(image, applied_patch, mask, target, probability_threshold, mode
 
             #"running SmoothGrad without replacing relu"
             org_smooth_grad.feed_image(perturbated_image) 
-            s aliency = org_smooth_grad.return_saliency(idx= target) # find the saliency of the prediction to the adv label (not necessarily the top-1 label right now)  
+            saliency = org_smooth_grad.return_saliency(idx= target) # find the saliency of the prediction to the adv label (not necessarily the top-1 label right now)  
             #"avg blurring"
             saliency_maxLoc = blur(saliency)
 
