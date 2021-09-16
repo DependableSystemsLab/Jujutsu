@@ -2,8 +2,7 @@
 perform attack detection by comparing the prediciton labels on the source image and 2 hold-out images transplanted with salient features from the source img
 
 """
-
-import eagerpy as ep
+ 
 import warnings
 import os
 import numpy as np
@@ -16,8 +15,7 @@ import cv2
 #from PIL import Image
 import torch
 import sys 
-import argparse
-import foolbox
+import argparse 
 import re
 
 
