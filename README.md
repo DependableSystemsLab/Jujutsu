@@ -25,7 +25,7 @@ This paper introduces a technique to *detect and mitigation* robust and universa
 
 ## How to run
 
-Download the data for ImageNette dataset at https://drive.google.com/file/d/16d8DsecjnWBKoupQQR0ZkWL9yHGSqSje/view?usp=sharing, unzip it and put it under the main directory. This folder contains the entire ImageNette dataset, a set of hold-out images and their saliency maps.
+Download the data for ImageNette dataset at https://drive.google.com/file/d/16d8DsecjnWBKoupQQR0ZkWL9yHGSqSje/view?usp=sharing, unzip it and put it under the main directory. This folder contains the entire ImageNette dataset, a set of hold-out images and their saliency maps, and the weights of a ResNet-18 model.
 
 
 ### Detection
@@ -60,7 +60,7 @@ If you find this code useful, please consider citing our paper
 
 ```
 @article{chen2021turning,
-  title={Turning Your Strength against You: Detecting and Mitigating Robust and Universal Adversarial Patch Attack},
+  title={Turning Your Strength against You: Detecting and Mitigating Robust and Universal Adversarial Patch Attacks},
   author={Chen, Zitao and Dash, Pritam and Pattabiraman, Karthik},
   journal={arXiv preprint arXiv:2108.05075},
   year={2021}
