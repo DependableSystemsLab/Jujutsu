@@ -1,6 +1,6 @@
-'''
+"""
 This file is to get the cooridinate for locating the salient feature in the image and add it into the file's name.
-'''
+"""
 
 #
 #
@@ -46,7 +46,7 @@ for i in range(len(img_files)):
     tmp = regexp.findall(imgFile.replace(args['img_folder'], '')) 
     saliency_imgFile = args['saliency_folder'].rstrip("/") + "/" + tmp[0] + tmp[1] + "_0049.png"
     
-    print(i , imgFile, saliency_imgFile)
+    #print(i , imgFile, saliency_imgFile)
 
     saliency_img = cv2.imread(saliency_imgFile)
     source_img = cv2.imread(imgFile)    
@@ -63,7 +63,7 @@ for i in range(len(img_files)):
     newFileName = imgFile.replace(".npy", "=" + str(maxLoc[0])+"="+str(maxLoc[1]) + ".npy"  ).replace(args['img_folder'], new_folder)
     #print(imgFile, ' ===> ', newFileName)
 
-    print( "\t\tcp {} {}".format(imgFile, newFileName) ) 
+    #print( "\t\tcp {} {}".format(imgFile, newFileName) ) 
     os.system( "cp {} {}".format(imgFile, newFileName) )
      
  

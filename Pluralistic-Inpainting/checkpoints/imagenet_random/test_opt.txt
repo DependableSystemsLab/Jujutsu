@@ -1,5 +1,5 @@
 --------------Options--------------
-batchSize: 8
+batchSize: 16
 checkpoints_dir: ./checkpoints
 display_id: 1
 display_port: 8097
@@ -8,7 +8,7 @@ display_winsize: 256
 fineSize: [224, 224]
 gpu_ids: 0
 how_many: 50
-img_file: ../resnet50_square_859_npy_test_adv_result_006_with_coordinate
+img_file: ../imagenette_5_square_r51_org_test_misdetected_007_with_coordinate
 isTrain: False
 is_square_patch: 1
 iterative_mask: 1
@@ -28,7 +28,7 @@ ntest: inf
 output_scale: 4
 phase: test
 resize_or_crop: resize_and_crop
-results_dir: ./res/
+results_dir: ./imagenette_square_5_r51_org_test_misdetected_007_100/
 save_number: 10
 which_iter: latest
 ----------------End----------------

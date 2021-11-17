@@ -26,11 +26,13 @@ ap.add_argument("--adv_input", type=int, default=0, help='indicate whether the s
 ap.add_argument("--held_out_input_folder", type=str, required=True, help='folder for held-out images')
 ap.add_argument("--held_out_saliency", type=str, required=True, help='folder for the saliency maps of the held-out images')
 ap.add_argument("--noise_percentage", type=str, required=True, help='size of the patch size. This is only for labeling the output folder')
-ap.add_argument('--model', type=str, required=True, help='model name')
+ap.add_argument('--dataset', type=str, required=True, help='dataset name')
+
 ap.add_argument('--target', type=str, required=True, help='target label')
 ap.add_argument('--patch_type', type=str, default='square', help="patch type: rectangle or square")
 ap.add_argument('--random_seed' , type = int, default=100, help='random seed. Needed if you want to perform feature transfer for multiple times, so that each times different random hold-out images would be chosen')
 ap.add_argument('--num_of_feature_trans', type=int, default=1, help='tag to differentiate folders when performing feature transfer multiple times')
+ap.add_argument('--save_folder', type=str, default='.',  help="directory to save the resuluting images")
 
 
 args = vars(ap.parse_args()) 
@@ -45,7 +47,7 @@ if(not args['held_out_input_folder'] ==None):
     held_out_input_folder = []    
     for r, d, f in os.walk(args['held_out_input_folder']):
         for file in f: 
-            if(".jpg" in file):
+            if(".jpg" in file or '.png' in file):
                 held_out_input_folder.append(os.path.join(r, file))
 
 
@@ -104,8 +106,8 @@ for i in range(len(files)):
 
     "Get the source file name based on the saliency file's name"
     source_imgFile = args["img_folder"].rstrip("/") + "/" + tmp[0] + tmp[1] + ".npy"
-    print(i , saliency_imgFile, source_imgFile)
-    print()
+    #print(i , saliency_imgFile, source_imgFile, flush=True)
+    #print()
     try:
         saliency_img = cv2.imread(saliency_imgFile)
         source_img = np.load(source_imgFile) 
@@ -117,13 +119,10 @@ for i in range(len(files)):
     # perform a naive attempt to find the (x, y) coordinates of
     # the area of the image with the largest intensity value
     (minVal, maxVal, minLoc, maxLoc) = cv2.minMaxLoc(gray) 
+ 
 
-    # apply a Gaussian blur to the image then find the brightest
-    # region
-    #gray = cv2.GaussianBlur(gray, (args["radius"], args["radius"]), 0)
-
-    "averaging to identify the high density region."
-    "outlier large point will be smoothed out after averaging"
+    #"averaging to identify the high density region."
+    #"outlier large point will be smoothed out after averaging"
     gray = cv2.blur(gray, (args["radius"], args["radius"]) )
     #gray = cv2.blur(gray, (args["radius"], args["radius"]) )
 
@@ -133,10 +132,14 @@ for i in range(len(files)):
     source_img = source_img[0]
     img_shape = source_img.shape 
     start, end = get_coordinate_for_recetange(maxLoc[0], maxLoc[1], args['radius'], img_shape[1], img_shape[2], args["patch_type"])
-    mean = (0.485, 0.456, 0.406)
-    std = (0.229, 0.224, 0.225)
 
- 
+    if(args['dataset'] != 'vggface'):
+        mean = (0.485, 0.456, 0.406)
+        std = (0.229, 0.224, 0.225)
+    else:
+        mean = [0.489, 0.409, 0.372]
+        std = [1, 1, 1]
+         
     # read held_out_input
     rand_indx = np.random.randint(low=0, high= len(held_out_input_folder)-1 ) 
 
@@ -167,8 +170,7 @@ for i in range(len(files)):
     for r, d, f in os.walk(args['held_out_saliency']):
         for file in f: 
             if( selected_held_out_input in file ):
-                held_out_saliency = file
-                #print(held_out_saliency, '----')
+                held_out_saliency = file 
                 break
     saliency_held_out_input = cv2.imread(args['held_out_saliency'] + "/" + held_out_saliency) 
 
@@ -187,9 +189,9 @@ for i in range(len(files)):
 
     
     if(args['adv_input'] == 0 ):
-        SAVE = "./{}_{}_{}feature_transfer_org_comp_{}".format(args['model'], args['target'], args['num_of_feature_trans'], args['noise_percentage'].replace('.', ''))
+        SAVE = "{}/{}_{}_{}_{}feature_transfer_org_comp_{}".format(args['save_folder'].rstrip("/"), args['dataset'], args['target'], args['patch_type'], args['num_of_feature_trans'], args['noise_percentage'].replace('.', ''))
     elif( args['adv_input'] == 1 ):
-        SAVE = "./{}_{}_{}feature_transfer_adv_comp_{}".format(args['model'], args['target'], args['num_of_feature_trans'], args['noise_percentage'].replace('.', '')) 
+        SAVE = "{}/{}_{}_{}_{}feature_transfer_adv_comp_{}".format(args['save_folder'].rstrip("/"), args['dataset'], args['target'], args['patch_type'], args['num_of_feature_trans'], args['noise_percentage'].replace('.', '')) 
 
     if(not os.path.exists(SAVE)):
         os.mkdir(SAVE)
@@ -199,6 +201,7 @@ for i in range(len(files)):
 
 
  
+
 
 
 

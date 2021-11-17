@@ -4,7 +4,6 @@
 
 import numpy as np
 import csv
-#import matplotlib.pyplot as plt
 import torch
 import torchvision
 import torchvision.transforms as transforms
@@ -41,6 +40,8 @@ def dataloader(train_size, test_size, data_dir, batch_size, num_workers, total_n
     test_loader = DataLoader(dataset=test_dataset, batch_size=batch_size, sampler=SubsetRandomSampler(test_index), num_workers=num_workers, pin_memory=True, shuffle=False)
     return train_loader, test_loader
 
+
+
 # Test the model on clean dataset
 def test(model, dataloader):
     model.eval()
@@ -57,6 +58,28 @@ def test(model, dataloader):
     print(correct, total, correct/total)
     return correct / total
 
+# Test the model on clean dataset
+def test_place(model, dataloader, classes):
+    model.eval()
+    correct, total = 0, 0
+
+    for (images, labels) in dataloader:
+
+        label = int( classes[ labels.item() ] )
+
+        images = images.cuda()
+        #labels = labels.cuda()
+        outputs = model(images)
+        _, predicted = torch.max(outputs.data, 1)
+        total += 1
+        if(predicted[0].data.cpu().numpy() == labels):
+            correct += 1
+    print(correct, total, correct/total)
+    return correct / total
+
+
+
+
 # Load the log and generate the training line
 def log_generation(log_dir):
     # Load the statistics in the log
@@ -72,17 +95,3 @@ def log_generation(log_dir):
                 epochs.append(int(i[0]))
                 train_rate.append(float(i[1]))
                 test_rate.append(float(i[2]))
-    '''
-    # Generate the success line
-    plt.figure(num=0)
-    plt.plot(epochs, test_rate, label='test_success_rate', linewidth=2, color='r')
-    plt.plot(epochs, train_rate, label='train_success_rate', linewidth=2, color='b')
-    plt.xlabel("epoch")
-    plt.ylabel("success rate")
-    plt.xlim(-1, max(epochs) + 1)
-    plt.ylim(0, 1.0)
-    plt.title("patch attack success rate")
-    plt.legend()
-    plt.savefig("training_pictures/patch_attack_success_rate.png")
-    plt.close(0)
-    '''

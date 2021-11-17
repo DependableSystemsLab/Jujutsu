@@ -40,6 +40,27 @@ def mask_generation(mask_type='rectangle', patch=None, image_size=(3, 224, 224))
     mask[mask != 0] = 1.0
     return applied_patch, mask, x_location, y_location
 
+
+def corner_mask_generation(mask_type='rectangle', patch=None, image_size=(3, 224, 224)):
+    applied_patch = np.zeros(image_size)
+    if mask_type == 'rectangle' or mask_type == 'square':
+        '''Square Patch
+        # patch rotation
+        rotation_angle = np.random.choice(4)
+        for i in range(patch.shape[0]):
+            patch[i] = np.rot90(patch[i], rotation_angle)  # The actual rotation angle is rotation_angle * 90
+        '''
+        # patch location
+        x_location = image_size[1]-patch.shape[1]
+        y_location = image_size[2]-patch.shape[2]
+        for i in range(patch.shape[0]):
+            applied_patch[:, x_location:x_location + patch.shape[1], y_location:y_location + patch.shape[2]] = patch
+    mask = applied_patch.copy()
+    mask[mask != 0] = 1.0
+    return applied_patch, mask, x_location, y_location
+
+
+
 # Test the patch on dataset
 def test_patch(patch_type, target, patch, test_loader, model):
     model.eval()
@@ -63,3 +84,4 @@ def test_patch(patch_type, target, patch, test_loader, model):
             if predicted[0].data.cpu().numpy() == target:
                 test_success += 1
     return test_success / test_actual_total
+
