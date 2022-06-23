@@ -29,7 +29,7 @@ This repo contains the code and data to reproduce the main results in our [paper
 
 First download the data [here](https://drive.google.com/file/d/1OwOS_x2bvW0w-VziVI9QkSTjNEmsSAjr/view?usp=sharing) and move all 5 folders to the current directory: 4 folders for 4 datasets and 1 for image inpainting. 
 
-Then you can run all the scripts as shown below. Each script performs both attack detection and mitigation on one setting (i.e., one adversarial patch). 
+Then you can run all the scripts as shown below - you can find these scripts in ```./shell-script``` and move them to the main directory and run). Each script performs both attack detection and mitigation on one setting (i.e., one adversarial patch). 
 
 Each datasets contain 7 different evaluation settings, 3 for patches in different sizes (5%-7%) and 4 for patches targeting different labels. 
 
@@ -75,7 +75,7 @@ For example, ```./imagenet-859-007.sh  >> R-imagenet-859-007 2>&1``` evaluates a
 
 **NOTE**: Running each script will generate a large number of files and occupy space. You may consider running the above scripts sequentially if you have space/file limit in your machine. The script will *delete* all the generated files after completing the experiment.
 
-**More experiments**: you can find more scripts in ```./shell-script``` to run more experiments, including evaluation on *larger* patches (8%-10%) and on rectangular patch. Move these scripts to the main directory and run similarly as above.
+**More experiments**: you can find more scripts in ```./shell-script``` to run more experiments, including evaluation on *larger* patches (8%-10%) and on rectangular patch. 
 
 *```detailed-usage.md``` explains the usage of different Python scripts.*
  
