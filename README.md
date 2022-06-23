@@ -4,13 +4,13 @@
 
 This repo contains the code and data to reproduce the main results in our [paper](https://arxiv.org/abs/2108.05075) on all 4 datasets (you'll need to download the data first - see below).
 
-```./imagenette-model``` contains the ImageNette dataset and its hold-out inputs. 
-```./imagenet-model``` contains the ImageNet dataset and its hold-out inputs. 
-```./celeb-model``` contains the CelebA dataset and its hold-out inputs. 
-```./place-model``` contains Place365 dataset and its hold-out inputs. 
-```./patch_files``` contains the adversarial patches on all datasets.
-```./Pluralistic-Inpainting``` is for image inpainting.
-```./shell-script``` contains scripts for more experiments.
+- ```./imagenette-model``` contains the ImageNette dataset and its hold-out inputs. 
+- ```./imagenet-model``` contains the ImageNet dataset and its hold-out inputs. 
+- ```./celeb-model``` contains the CelebA dataset and its hold-out inputs. 
+- ```./place-model``` contains Place365 dataset and its hold-out inputs. 
+- ```./patch_files``` contains the adversarial patches on all datasets.
+- ```./Pluralistic-Inpainting``` is for image inpainting.
+- ```./shell-script``` contains scripts for more experiments.
 
 
 ## Requirements
