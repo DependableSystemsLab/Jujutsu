@@ -1,10 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-#
-# Author:   Kazuto Nakashima
-# URL:      http://kazuto1011.github.io
-# Created:  2017-10-11
-
 from __future__ import print_function
 
 import cv2

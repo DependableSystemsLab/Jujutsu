@@ -38,11 +38,7 @@ parser.add_argument('--model_path', type=str, default='./imagenette/resnet18-ima
  
 
 args = parser.parse_args()
-
-# Patch attack via optimization
-# According to reference [1], one image is attacked each time
-# Assert: applied patch should be a numpy
-# Return the final perturbated picture and the applied patch. Their types are both numpy
+ 
 def patch_attack(image, applied_patch, mask, target, probability_threshold, model, lr=1, max_iteration=100):
     model.eval()
     applied_patch = torch.from_numpy(applied_patch)

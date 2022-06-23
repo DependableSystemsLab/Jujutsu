@@ -1,7 +1,3 @@
-# Adversarial Patch: utils
-# Utils in need to generate the patch and test on the dataset.
-# Created by Junbo Zhao 2020/3/19
-
 import numpy as np
 import csv
 import torch

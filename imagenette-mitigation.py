@@ -28,7 +28,7 @@ ap.add_argument('--GPU', type=str, default=0, help="index pf used GPU")
 ap.add_argument('--input_tag', type=str, required=True, default='out_0', help='set ``out_0'' or ``mask'': ``out_0'' means comparing the org img with the inpainted img; ``mask'' means comparing the org img with the masked img without inpainting')
 
  
-ap.add_argument('--model_path', type=str, default='/home/zitao/imagenette')
+ap.add_argument('--model_path', type=str, default='./')
 
 
 args = vars(ap.parse_args()) 
@@ -45,7 +45,7 @@ def main() -> None:
 
     # instantiate a model (could also be a TensorFlow or JAX model)
  
-    device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # Load the model
     # setting up model
@@ -132,11 +132,11 @@ def main() -> None:
     #print(args['img_folder'])
 
     if(args['extract_label']):
-        print("1) Recovered {} out of {}, Robust accuracy = {:.4f}".format(recover, cnt, recover/cnt))
-        print("2) (Reduced) detection success recall: {} out of {} adv images that remain the targeted adv label after mitigation (the lower the better)".format(remain_targeted_label,cnt) )
+        print("3) Recovered {} out of {}, Robust accuracy = {:.4f}".format(recover, cnt, recover/cnt))
+        print("4) (Reduced) detection success recall: {} out of {} adv images that remain the targeted adv label after mitigation (the lower the better)".format(remain_targeted_label,cnt) )
     else:
 
-        print("3) Reduced FP on benign samples: {} out of {} benign images that remain the same label before and after masking/inpainting (the higher the better)".format(recover, cnt))
+        print("5) Reduced FP on benign samples: {} out of {} benign images that remain the same label before and after masking/inpainting (the higher the better)".format(recover, cnt))
     
 if __name__ == "__main__":
     main()

@@ -1,12 +1,6 @@
-# Adversarial Patch: patch_utils
-# utils for patch initialization and mask generation
-# Created by Junbo Zhao 2020/3/19
-
 import numpy as np
 import torch
-
-# Initialize the patch
-# TODO: Add circle type
+ 
 def patch_initialization(patch_type='rectangle', image_size=(3, 224, 224), noise_percentage=0.03):
     if patch_type == 'rectangle':
         # Rectangular Patch

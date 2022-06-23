@@ -3,20 +3,7 @@ This is to generate adv samples by applying the patch to the clean images, and a
 The patched image is saved as npy format and saliency map as png
 """
 
-
-
-
-# Adversarial Patch Attack
-# Created by Junbo Zhao 2020/3/17
-
-"""
-Reference:
-[1] Tom B. Brown, Dandelion Mané, Aurko Roy, Martín Abadi, Justin Gilmer
-    Adversarial Patch. arXiv:1712.09665
-"""
-
-from __future__ import print_function
-
+# code from https://github.com/A-LinCui/Adversarial_Patch_Attack
 import cv2
 import numpy as np
 import torch
@@ -93,13 +80,10 @@ def gen_patched_img(patch_type, target, patch, test_loader, model, org_img_folde
                 np.save( adv_img_folder + "/" + str(test_success) +  "_" + str(label.item()) + ".npy" , perturbated_image.cpu().numpy() )
                 np.save( org_img_folder + "/" + str(test_success) +  "_" + str(label.item()) + ".npy" , image.cpu().numpy() )
 
-    print(test_success, test_actual_total)
+    print("%d successful adv samples out of %d samples"%(test_success, test_actual_total))
     return test_success / test_actual_total
 
-
-
-# python create_patched_input_with_saliency.py --noise_percentage 0.06 --GPU 0 --model vggnet --patch_file vggnet_best_org_patch_006.npy --target 
-
+ 
 
 
 parser = argparse.ArgumentParser()
@@ -137,7 +121,11 @@ np.random.seed(seed)
 random.seed(seed) 
 torch.manual_seed(seed)
 
-device = torch.device("cuda:%s"%args.GPU if torch.cuda.is_available() else "cpu")
+
+os.environ["CUDA_VISIBLE_DEVICES"] = args.GPU
+
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 # Load the model
 # setting up model

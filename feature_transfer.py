@@ -3,12 +3,7 @@ This file is to identify the salient feature in one image, extract the salient f
  and transplant it into least-salient region of a new image 
  the input and output are all in npy format"
 """
-
-#
-#
-# https://www.pyimagesearch.com/2014/09/29/finding-brightest-spot-image-using-python-opencv/
-#
-
+ 
 # import the necessary packages
 import numpy as np
 import argparse

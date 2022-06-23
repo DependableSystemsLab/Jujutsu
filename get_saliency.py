@@ -9,8 +9,7 @@ from torch.autograd import Variable
 import torchvision
 from torchvision import datasets, models, transforms
 from torch.utils.data import DataLoader
-import re 
-from models.vgg_face import VGG_16
+import re  
 from torch.utils.data.dataset import Dataset
 import argparse
 import os
@@ -85,17 +84,6 @@ elif(args.dataset == 'place'):
     state_dict = {str.replace(k,'module.',''): v for k,v in checkpoint['state_dict'].items()}
     model.load_state_dict(state_dict)
     model.cuda()
-
-elif(args.dataset == 'vggface'):
-    device = torch.device('cuda:0' if torch.cuda.is_available() else 'cpu')
-    net = VGG_16()
-    net.load_weights(path='/home/zitao/Februus/face/pretrained/VGG_FACE.t7')
-    num_ftrs = net.fc8.in_features
-    net.fc8 = nn.Linear(num_ftrs, 170)
-    net.load_state_dict(torch.load(args.model_path, map_location=device))
-    model = net.to(device)
-    model.eval()
-    print("Loading model successfully\n")
 
 elif(args.dataset == 'imagenette'):
     # Load the model

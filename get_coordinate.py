@@ -2,11 +2,6 @@
 This file is to get the cooridinate for locating the salient feature in the image and add it into the file's name.
 """
 
-#
-#
-# https://www.pyimagesearch.com/2014/09/29/finding-brightest-spot-image-using-python-opencv/
-#
-
 # import the necessary packages
 import numpy as np
 import argparse

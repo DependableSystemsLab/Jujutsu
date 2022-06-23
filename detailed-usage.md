@@ -5,8 +5,8 @@
 
 ```
 python imagenette-attack.py --target 5 --noise_percentage 0.07 \
-              --train_size 2000 --model_path /imagenette/resnet18-imagenette.pt \
-              --epochs 30 --data_dir ./imagenette/imagenette2-320 \
+              --train_size 2000 --model_path /imagenette-model/resnet18-imagenette.pt \
+              --epochs 30 --data_dir ./imagenette-model/imagenette2-320 \
               --patch_type square 
 ```
 
@@ -23,8 +23,8 @@ python imagenette-attack.py --target 5 --noise_percentage 0.07 \
 python imagenette_create_patched_input_with_saliency.py --noise_percentage 0.07  \
   --patch_file patch_files/imagenette_square_best_org_patch_007_5.npy --target 5 \
    --patch_type square \
-   --model_path ./imagenette/resnet18-imagenette.pt \
-   --data_dir ./imagenette/imagenette2-320 --test_size 5000
+   --model_path ./imagenette-model/resnet18-imagenette.pt \
+   --data_dir ./imagenette-model/imagenette2-320 --test_size 3500
 ```
 
 - ```--test_size```: number of adversarial samples to generate
@@ -36,9 +36,9 @@ python imagenette_create_patched_input_with_saliency.py --noise_percentage 0.07 
 
 ```
 python get_saliency.py --model resnet18 \
-    --img_folder ./imagenette/imagenette_hold_out \
-    --output_folder /home/zitao/imagenette/imagenette_hold_out_saliency \
-    --dataset imagenette --model_path ./imagenette/resnet18-imagenette.pt
+    --img_folder ./imagenette-model/imagenette_hold_out \
+    --output_folder ./imagenette-model/imagenette_hold_out_saliency \
+    --dataset imagenette --model_path ./imagenette-model/resnet18-imagenette.pt
 ```
 
 - ```--img_folder```: folder containing the hold-out images. 
@@ -50,7 +50,7 @@ python get_saliency.py --model resnet18 \
 ```
 python feature_transfer.py --radius 51 --saliency_folder imagenette_square_5_npy_test_adv_saliency_007 \
     --img_folder imagenette_square_5_npy_test_adv_result_007 --adv_input 1 \
-    --held_out_input_folder ./imagenette/imagenette_hold_out --held_out_saliency ./imagenette/imagenette_hold_out_saliency \
+    --held_out_input_folder ./imagenette-model/imagenette_hold_out --held_out_saliency ./imagenette-model/imagenette_hold_out_saliency \
     --noise_percentage 0.07  --target 5 --patch_type square \
     --num_of_feature_trans 1 --random_seed 10 --dataset imagenette
 ```
@@ -67,7 +67,7 @@ python feature_transfer.py --radius 51 --saliency_folder imagenette_square_5_npy
 python imagenette-detection.py --is_adv 1 --num_input 0 --img_folder imagenette_5_square_1feature_transfer_adv_comp_007  \
         --source_folder imagenette_square_5_npy_test_adv_result_007 --noise_percentage 0.07 \
         --radius 51 --second_folder imagenette_5_square_2feature_transfer_adv_comp_007 --target 5 \
-        --save_folder ./ --patch_type square --model_path ./imagenette/resnet18-imagenette.pt
+        --save_folder ./ --patch_type square --model_path ./imagenette-model/resnet18-imagenette.pt
 ```
 
 - ```--source_folder```: The test images that we want to test whether they are adversarial or not
@@ -108,10 +108,10 @@ Go back to the main directory and run:
 
 ```
 python imagenette-mitigation.py --img_folder Pluralistic-Inpainting/imagenette_square_5_r51_adv_test_detected_007_100 \
-    --input_tag out_0 --normalize 1 --input_size 0 --extract_label 1  --model_path ./imagenette/resnet18-imagenette.pt 
+    --input_tag out_0 --normalize 1 --input_size 0 --extract_label 1  --model_path ./imagenette-model/resnet18-imagenette.pt 
 
 python imagenette-mitigation.py --img_folder Pluralistic-Inpainting/imagenette_square_5_r51_org_test_misdetected_007_100 \
-    --input_tag out_0 --normalize 1 --input_size 0 --extract_label 0  --model_path ./imagenette/resnet18-imagenette.pt
+    --input_tag out_0 --normalize 1 --input_size 0 --extract_label 0  --model_path ./imagenette-model/resnet18-imagenette.pt
 ```
 
 - ```--img_folder```: output folder from image inpainting (step 6.2)

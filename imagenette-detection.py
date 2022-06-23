@@ -34,18 +34,12 @@ ap.add_argument("-r", "--radius", default=51, type = int, required=True, help = 
 ap.add_argument('--GPU', type=str, default='0', help="index pf used GPU")
 ap.add_argument('--target', type=int, default=859)
 ap.add_argument('--patch_type', type=str, default='square', help="patch type: rectangle or square")
-
-
-ap.add_argument('--model_path', type=str, default='/home/zitao/imagenette')
-
-
-
+ap.add_argument('--model_path', type=str, default='./')
 ap.add_argument('--save_folder', type=str, default='.')
 
 
 args = vars(ap.parse_args()) 
-
-os.environ["CUDA_VISIBLE_DEVICES"] = args['GPU']
+ 
 
 if(args['is_adv']):
     filter_folder = "{}/imagenette_{}_{}_r{}_adv_test_detected_{}".format( args['save_folder'].rstrip('/'),  str(args['target']), args['patch_type'],  args['radius'], args['noise_percentage'].replace('.', '')) 
