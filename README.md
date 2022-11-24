@@ -1,6 +1,6 @@
 # Code for the paper - *Turning Your Strength against You: Detecting and Mitigating Robust and Universal Adversarial Patch Attack* 
 
-**Update 2022 Jun**: Upload the code and data for all 4 datasets, you can now easily reproduce our results using all the scripts provided.
+**Updated 2022 Nov**: Our paper will appear at [AsiaCCS'23](https://asiaccs2023.org)
 
 This repo contains the code and data to reproduce the main results in our [paper](https://arxiv.org/abs/2108.05075) on all 4 datasets (you'll need to download the data first - see below).
 
